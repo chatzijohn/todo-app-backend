@@ -1,7 +1,9 @@
 
 import { DataTypes, Sequelize } from 'sequelize'
-import { sequelize } from '../../sequelize/config/config'
+import sequelizeConfig from '../../sequelize/config/config'
 import TaskModel from './TaskModel'
+
+const sequelize = new Sequelize(sequelizeConfig.development)
 
 const models = {
   Task: TaskModel.init(sequelize, DataTypes),
