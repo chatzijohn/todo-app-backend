@@ -37,7 +37,6 @@ project-root/
 │ ├── models/
 │ ├── routes/
 │ ├── services/
-│ ├── config/
 │ ├── app.js
 │ ├── errorHandler.ts
 ├── tests/
