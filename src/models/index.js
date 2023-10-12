@@ -10,7 +10,7 @@ const models = {
 
 // Add associations between models if needed
 // For example, if Task has associations with other models:
-// models.Task.hasMany(models.OtherModel);
+// models.User.hasMany(models.OtherModel);
 
 export { sequelize };
 export default models;
