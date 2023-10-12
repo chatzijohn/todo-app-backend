@@ -1,8 +1,9 @@
 # Ignore dotenv
 .env
 
-# Ignore node_modules.
+# Ignore npm files
 node_modules/
+package-lock.json
 
 # Ignore all logfiles and tempfiles.
 /log/*
