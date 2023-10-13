@@ -31,8 +31,8 @@ const Task = sequelize.define("task", {
 // Create a new Task
 Task.add = async (title) => {
     try {
-        const tasks = await Task.create(title)
-        return tasks;
+        const task = await Task.create(title)
+        return task;
     } catch (err) {
         throw err
     }
