@@ -34,7 +34,7 @@ const addTask = async (req, res, next) => {
     try {
         const { title } = req.body
         if (!title) {
-            throw { name: "MissingTitleError", message: "Task title is required" }
+            throw { name: "MissingTitleError", message: "A title must be provided" }
         } else {
              // If "title" is present, you can proceed to create the task
             const task = await Task.add(title)
