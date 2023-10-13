@@ -7,7 +7,10 @@ const getTasks = async (req, res) => {
     } catch (error) {
         next(error);
     }
-
-
-
 }
+
+module.exports = {
+    getTasks,
+
+  }
+  
