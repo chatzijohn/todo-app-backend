@@ -67,10 +67,10 @@ Task.updateById = async (id, updates) => {
     try {
         const task = await Task.findByPk(id)
         if (!task) {
-        return { error: "Task not found" }
+            return { error: "Task not found" }
         } else {
-        const updatedTask = await task.update(updates)
-        return updatedTask
+            const updatedTask = await task.update(updates)
+            return updatedTask
         }
     } catch (err) {
         throw err
