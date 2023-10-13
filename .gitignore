@@ -10,3 +10,6 @@ package-lock.json
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+
+# Ignore my example files
+./src/controllers/WaterController.example.js

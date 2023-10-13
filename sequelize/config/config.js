@@ -26,3 +26,4 @@ const sequelizeConfig = {
   }
 }
 
+module.exports = sequelizeConfig

@@ -1,5 +1,5 @@
-import { DataTypes, Model } from "sequelize"
-import { sequelize } from './index'; // Import the centralized Sequelize instance
+import { DataTypes } from "sequelize"
+import { sequelize } from './index' // Import the centralized Sequelize instance
 
 const Task = sequelize.define("task", {
     id: {
@@ -80,11 +80,12 @@ Task.updateById = async (id, updates) => {
 // Delete a Task by ID
 Task.prototype.delete = async (id) => {
     try {
-        const task = await Task.findByPk(id);
+        const task = await Task.findByPk(id)
         if (!task) {
-          return { error: 'Task not found' };
+          return { error: 'Task not found' }
+        } else {
+            await task.destroy()
         }
-        await task.destroy();
       } catch (err) {
         throw err
     }
