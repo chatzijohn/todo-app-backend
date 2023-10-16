@@ -1,5 +1,7 @@
-import { DataTypes } from "sequelize"
-import { sequelize } from './index' // Import the centralized Sequelize instance
+import { Sequelize, DataTypes } from "sequelize"
+import sequelizeConfig from '../../sequelize/config/config.js' // Import the centralized Sequelize instance
+
+const sequelize = new Sequelize(sequelizeConfig.development)
 
 const Task = sequelize.define("task", {
     id: {
@@ -29,9 +31,9 @@ const Task = sequelize.define("task", {
 })
 
 // Create a new Task
-Task.add = async (title) => {
+Task.save = async function (title){
     try {
-        const task = await Task.create(title)
+        const task = await Task.create({title})
         return task;
     } catch (err) {
         throw err
@@ -90,6 +92,5 @@ Task.prototype.delete = async (id) => {
         throw err
     }
 }
-  
 
-module.exports = Task
+export default Task

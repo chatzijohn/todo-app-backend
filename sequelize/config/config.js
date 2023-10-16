@@ -1,5 +1,6 @@
 // Import the dotenv library
-require('dotenv').config()
+import dotenv from "dotenv"
+dotenv.config()
 
 // Sequelize configuration
 const sequelizeConfig = {
@@ -26,4 +27,4 @@ const sequelizeConfig = {
   }
 }
 
-module.exports = sequelizeConfig
+export default sequelizeConfig

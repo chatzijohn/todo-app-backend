@@ -1,8 +1,8 @@
 import express from "express"
-import taskRoutes from "./taskRoutes" // Entity Task routes
+import taskRouter from "./taskRoutes.js" // Entity Task routes
 
 const router = express.Router()
 
-router.use('/tasks', taskRoutes)
+router.use('/tasks', taskRouter)
 
-module.exports = router
+export default router

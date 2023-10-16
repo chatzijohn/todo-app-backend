@@ -1,4 +1,4 @@
-import Task from "../models/TaskModel"
+import Task from "../models/TaskModel.js"
 
 const getTaskById = async (id) => {
     const task = await Task.findById(id)
@@ -33,11 +33,12 @@ const getTask = async (req, res, next) => {
 const addTask = async (req, res, next) => {
     try {
         const { title } = req.body
+
         if (!title) {
             throw { name: "MissingTitleError", message: "A title must be provided" }
         } else {
-             // If "title" is present, you can proceed to create the task
-            const task = await Task.add(title)
+            //If "title" is present, you can proceed to create the task
+            const task = await Task.save(title);
 
             // Respond with the created task
             res.status(201).json(task)
@@ -76,7 +77,7 @@ const deleteTask = async (req, res, next) => {
     }
 }
 
-module.exports = {
+const controller = {
     getTasks,
     getTask,
     addTask,
@@ -84,3 +85,4 @@ module.exports = {
     deleteTask,
   }
   
+  export default controller
