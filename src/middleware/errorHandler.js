@@ -19,7 +19,7 @@ const errors = {
     // Add other error types here
 }
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, req, res) => {
     const errorType = errors[err.name]
     if (errorType) {
         res.status(errorType.statusCode).json({ message: errorType.message })
