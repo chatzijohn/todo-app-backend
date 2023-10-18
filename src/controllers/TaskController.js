@@ -12,7 +12,7 @@ const getTaskById = async (id) => {
 const getTasks = async  (req, res, next) => {
     try {
         const tasks = await Task.getAll()
-        res.status(200).json({ tasks });
+        res.status(200).json({ tasks })
     } catch (err) {
         console.log(err)
         next(err)
@@ -74,7 +74,6 @@ const deleteTask = async (req, res, next) => {
         const taskId = req.params.id
         //  If the task exists delete it
         const taskToDelete = await getTaskById(taskId)
-        console.log(taskToDelete)
         await taskToDelete.delete()
         res.status(200).json({ message: "Task deleted successfully" })
     } catch (err) {

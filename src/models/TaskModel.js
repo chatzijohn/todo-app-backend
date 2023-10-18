@@ -80,7 +80,7 @@ Task.updateById = async (id, updates) => {
 }
 
 // Delete a Task by ID
-Task.prototype.delete = async () => {
+Task.prototype.delete = async function() {
     try {
         await this.destroy()
       } catch (err) {
