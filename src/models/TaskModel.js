@@ -80,14 +80,9 @@ Task.updateById = async (id, updates) => {
 }
 
 // Delete a Task by ID
-Task.prototype.delete = async (id) => {
+Task.prototype.delete = async () => {
     try {
-        const task = await Task.findByPk(id)
-        if (!task) {
-            throw { name: 'TaskNotFoundError' }
-        } else {
-            await task.destroy()
-        }
+        await this.destroy()
       } catch (err) {
         throw err
     }

@@ -3,7 +3,7 @@ import Task from "../models/TaskModel.js"
 const getTaskById = async (id) => {
     const task = await Task.getById(id)
     if (!task) {
-      throw { name: "TaskNotFoundError" }
+        throw { name: "TaskNotFoundError" }
     } else {
         return task
     }
@@ -57,15 +57,10 @@ const updateTask = async (req, res, next) => {
         if (!task) {
             throw { name: "TaskNotFoundError" }
         } else {
-            const { completed } = req.body
-            if (!completed) {
-                throw { name: "NotCompletedError" }
-            } else {
-                // If "completed" is true, you can proceed to update the task
-                const task = await Task.updateById(taskId, completed)
-                // Respond with the updated task
-                res.status(200).json(task);
-            }
+            // If "completed" is true, you can proceed to update the task
+            const task = await Task.updateById(taskId, { completed: req.body.completed })
+            // Respond with the updated task
+            res.status(200).json(task);
         }
         
     } catch (err) {
@@ -79,6 +74,7 @@ const deleteTask = async (req, res, next) => {
         const taskId = req.params.id
         //  If the task exists delete it
         const taskToDelete = await getTaskById(taskId)
+        console.log(taskToDelete)
         await taskToDelete.delete()
         res.status(200).json({ message: "Task deleted successfully" })
     } catch (err) {
