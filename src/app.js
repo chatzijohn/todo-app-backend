@@ -13,7 +13,7 @@ const port = parseInt(process.env.API_PORT, 10)
 
 // Enable Cross Origin Resource Sharing
 app.use(cors({
-    origin: `${process.env.DB_HOST}`,
+    origin: `*`,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: '*'
