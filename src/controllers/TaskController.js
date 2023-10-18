@@ -1,15 +1,15 @@
 import Task from "../models/TaskModel.js"
 
 const getTaskById = async (id) => {
-    const task = await Task.findById(id)
+    const task = await Task.getById(id)
     if (!task) {
-      throw { name: "NotFoundError" }
+      throw { name: "TaskNotFoundError" }
     } else {
         return task
     }
 }
 
-const getTasks = async (res, next) => {
+const getTasks = async  (req, res, next) => {
     try {
         const tasks = await Task.getAll()
         res.status(200).json({ tasks });
@@ -35,7 +35,7 @@ const addTask = async (req, res, next) => {
         const { title } = req.body
 
         if (!title) {
-            throw { name: "MissingTitleError", message: "A title must be provided" }
+            throw { name: "MissingTitleError" }
         } else {
             //If "title" is present, you can proceed to create the task
             const task = await Task.save(title);
@@ -44,6 +44,7 @@ const addTask = async (req, res, next) => {
             res.status(201).json(task)
         }
     } catch (err) {
+        console.log(err.name)
         next(err)
     }
 }
@@ -51,16 +52,23 @@ const addTask = async (req, res, next) => {
 const updateTask = async (req, res, next) => {
     try {
         const taskId = req.params.id
-        const { completed } = req.body
-        if (!completed) {
-            throw { name: "NotCompletedError", message: "Task is not completed" }
+        const task = await Task.getById(taskId)
+        if (!task) {
+            throw { name: "TaskNotFoundError" }
         } else {
-            // If "completed" is true, you can proceed to update the task
-            const task = await Task.updateById(taskId, completed)
-            // Respond with the updated task
-            res.status(200).json(task);
+            const { completed } = req.body
+            if (!completed) {
+                throw { name: "NotCompletedError" }
+            } else {
+                // If "completed" is true, you can proceed to update the task
+                const task = await Task.updateById(taskId, completed)
+                // Respond with the updated task
+                res.status(200).json(task);
+            }
         }
+        
     } catch (err) {
+        console.log(err.name)
         next(err)
     }
 }

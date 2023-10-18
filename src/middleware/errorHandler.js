@@ -16,6 +16,8 @@ const errors = {
     BadRequestError: new CustomError("BadRequestError", 400, "Bad request. Please check your request payload"),
     MissingTitleError: new CustomError("MissingTitleError", 400, "A title must be provided"),
     NotCompletedError: new CustomError("NotCompletedError", 400, "Task is not completed"),
+    EmptyBodyError: new CustomError("EmptyBodyError", 400, "Body can't be empty"),
+    TaskNotFoundError: new CustomError("TaskNotFoundError", 404, "Task Not found"),
     // Add other error types here
 }
 
@@ -24,8 +26,8 @@ const errorHandler = (err, req, res, next) => {
     if (errorType) {
         res.status(errorType.statusCode).json({ message: errorType.message })
     } else {
-    // Handle unexpected errors
-    res.status(500).json({ message: "Internal Server Error" });
+        // Handle unexpected errors
+        res.status(500).json({ message: "Internal Server Error" });
     }
 }
 

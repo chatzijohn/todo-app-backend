@@ -1,9 +1,10 @@
 import express from "express"
+import errorHandler from "./middleware/errorHandler.js"
 import apiRouter from "./routes/api.js"
 import logger from "./config/logger.js"
 import cors from "cors"
 import dotenv from "dotenv"
-import errorHandler from "./middleware/errorHandler.js"
+
 
 dotenv.config()
 

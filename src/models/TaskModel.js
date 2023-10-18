@@ -55,7 +55,7 @@ Task.getById = async (id) => {
     try {
         const task = await Task.findByPk(id)
         if (!task) {
-            return { error: "Task not found" }
+            throw { name: "TaskNotFoundError" }
         } else {
             return task
         }
@@ -69,7 +69,7 @@ Task.updateById = async (id, updates) => {
     try {
         const task = await Task.findByPk(id)
         if (!task) {
-            return { error: "Task not found" }
+            throw { name: "TaskNotFoundError" }
         } else {
             const updatedTask = await task.update(updates)
             return updatedTask
@@ -84,7 +84,7 @@ Task.prototype.delete = async (id) => {
     try {
         const task = await Task.findByPk(id)
         if (!task) {
-          return { error: 'Task not found' }
+            throw { name: 'TaskNotFoundError' }
         } else {
             await task.destroy()
         }
