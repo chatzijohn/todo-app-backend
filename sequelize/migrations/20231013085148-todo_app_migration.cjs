@@ -16,7 +16,7 @@ module.exports = {
             allowNull: false,
         },
         completed: {
-            type: DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
         created_at: {

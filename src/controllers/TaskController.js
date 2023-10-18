@@ -14,7 +14,6 @@ const getTasks = async  (req, res, next) => {
         const tasks = await Task.getAll()
         res.status(200).json({ tasks })
     } catch (err) {
-        console.log(err)
         next(err)
     }
 }
