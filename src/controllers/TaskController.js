@@ -25,20 +25,18 @@ const getTask = async (req, res, next) => {
 const addTask = async (req, res, next) => {
     try {
         const { title } = req.body
-        const taskData = {
-            title
-        }
 
         if (!title) {
             throw { name: "MissingTitleError" }
         } else {
             //If "title" is present, you can proceed to create the task
-            const task = await Task.save(taskData);
+            const task = await Task.save({ title });
 
             // Respond with the created task
             res.status(201).json(task)
         }
     } catch (err) {
+        console.log(err)
         next(err)
     }
 }
