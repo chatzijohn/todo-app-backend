@@ -1,13 +1,5 @@
+// Only what's called by the routes
 import Task from "../models/TaskModel.js"
-
-const getTaskById = async (id) => {
-    const task = await Task.getById(id)
-    if (!task) {
-        throw { name: "TaskNotFoundError" }
-    } else {
-        return task
-    }
-}
 
 const getTasks = async  (req, res, next) => {
     try {
@@ -22,7 +14,7 @@ const getTask = async (req, res, next) => {
     try {
         const taskId = req.params.id
         //  If the task exists update it
-        const task = await getTaskById(taskId)
+        const task = await Task.getById(taskId)
 
         res.status(200).json(task);
     } catch (err) {
@@ -72,7 +64,7 @@ const deleteTask = async (req, res, next) => {
     try {
         const taskId = req.params.id
         //  If the task exists delete it
-        const taskToDelete = await getTaskById(taskId)
+        const taskToDelete = await Task.getById(taskId)
         await taskToDelete.delete()
         res.status(200).json({ message: "Task deleted successfully" })
     } catch (err) {
