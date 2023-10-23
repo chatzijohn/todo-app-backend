@@ -30,11 +30,21 @@ const Task = sequelize.define("task", {
     underscored: true
 })
 
-// Create a new Task
-Task.save = async function (title){
+// Create a new Task.
+Task.save = async (taskData) => {
     try {
-        const task = await Task.create({title})
-        return task;
+        if (taskData.id) {
+            const task = await Task.findByPk(taskData.id)
+            if (!task) {
+                throw { name: "TaskNotFoundError" }
+            } else {
+                const updatedTask = await task.update({ title: taskData.title, completed: taskData.completed })
+                return updatedTask
+            }
+        } else {
+            const newTask = await Task.create(taskData.title)
+            return newTask
+        }
     } catch (err) {
         throw err
     }
@@ -64,20 +74,20 @@ Task.getById = async (id) => {
     }
 }
 
-// Update a specific Task by ID
-Task.updateById = async (id, updates) => {
-    try {
-        const task = await Task.findByPk(id)
-        if (!task) {
-            throw { name: "TaskNotFoundError" }
-        } else {
-            const updatedTask = await task.update(updates)
-            return updatedTask
-        }
-    } catch (err) {
-        throw err
-    }
-}
+// // Update a specific Task by ID
+// Task.updateById = async (id, updates) => {
+//     try {
+//         const task = await Task.findByPk(id)
+//         if (!task) {
+//             throw { name: "TaskNotFoundError" }
+//         } else {
+//             const updatedTask = await task.update(updates)
+//             return updatedTask
+//         }
+//     } catch (err) {
+//         throw err
+//     }
+// }
 
 // Delete a Task by ID
 Task.prototype.delete = async function() {

@@ -25,18 +25,20 @@ const getTask = async (req, res, next) => {
 const addTask = async (req, res, next) => {
     try {
         const { title } = req.body
+        const taskData = {
+            title
+        }
 
         if (!title) {
             throw { name: "MissingTitleError" }
         } else {
             //If "title" is present, you can proceed to create the task
-            const task = await Task.save(title);
+            const task = await Task.save(taskData);
 
             // Respond with the created task
             res.status(201).json(task)
         }
     } catch (err) {
-        console.log(err.name)
         next(err)
     }
 }
@@ -44,16 +46,22 @@ const addTask = async (req, res, next) => {
 const updateTask = async (req, res, next) => {
     try {
         const taskId = req.params.id
+        const completed = req.body.completed
+        const title = req.body.title
+        const taskData = {
+            title,
+            taskId,
+            completed
+        }
         const task = await Task.getById(taskId)
         if (!task) {
             throw { name: "TaskNotFoundError" }
         } else {
             // If "completed" is true, you can proceed to update the task
-            const task = await Task.updateById(taskId, { completed: req.body.completed })
+            const task = await Task.save(taskData)
             // Respond with the updated task
             res.status(200).json(task);
         }
-        
     } catch (err) {
         console.log(err.name)
         next(err)
