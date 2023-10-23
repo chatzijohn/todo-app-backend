@@ -46,8 +46,8 @@ const addTask = async (req, res, next) => {
 const updateTask = async (req, res, next) => {
     try {
         const taskId = req.params.id
-        const completed = req.body.completed
-        const title = req.body.title
+        const {completed, title} = req.body
+
         const taskData = {
             title,
             taskId,
