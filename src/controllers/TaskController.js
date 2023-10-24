@@ -54,14 +54,15 @@ const updateTask = async (req, res, next) => {
             taskId,
             completed
         }
+        
         const task = await Task.getById(taskId)
         if (!task) {
             throw { name: "TaskNotFoundError" }
         } else {
-            // If "completed" is true, you can proceed to update the task
-            const task = await Task.save(taskData)
+            
+            const updatedTask = await Task.save(taskData)
             // Respond with the updated task
-            res.status(200).json(task);
+            res.status(200).json(updatedTask);
         }
     } catch (err) {
         console.log(err.name)

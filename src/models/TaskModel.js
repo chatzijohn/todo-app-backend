@@ -33,13 +33,20 @@ const Task = sequelize.define("task", {
 // Create a new Task.
 Task.save = async function (taskData) {
     try {
-        if (taskData.id) {
-        await Task.update({ title: taskData.title, completed: taskData.completed })
+        let updatedTask
+        if (taskData.taskId) {
+            await Task.update({
+                title: taskData.title,
+                completed: taskData.completed 
+                },
+                {where: {id: taskData.taskId}
+            })
+            updatedTask = await Task.findByPk(taskData.taskId)
         } else {
             const newTask = await Task.create({title: taskData.title})
-            taskData.id = newTask.id
+            updatedTask  = newTask
         }
-        return taskData
+        return updatedTask
     } catch (err) {
         throw err
     }
