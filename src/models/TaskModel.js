@@ -30,7 +30,7 @@ const Task = sequelize.define("task", {
     underscored: true
 })
 
-// Create a new Task.
+// Create a new Task or update an existing one.
 Task.save = async function (taskData) {
     try {
         let updatedTask
