@@ -37,13 +37,18 @@ Task.save = async function (taskData) {
         if (taskData.taskId) {
             await Task.update({
                 title: taskData.title,
-                completed: taskData.completed 
+                completed: taskData.completed,
+                updatedAt: Date(),
                 },
                 {where: {id: taskData.taskId}
             })
             updatedTask = await Task.findByPk(taskData.taskId)
         } else {
-            const newTask = await Task.create({title: taskData.title})
+            const newTask = await Task.create({
+                title: taskData.title,
+                createdAt: Date(),
+                updatedAt: Date(),
+            })
             updatedTask  = newTask
         }
         return updatedTask

@@ -1,6 +1,6 @@
 'use strict';
 
-const { DataTypes } = require("sequelize")
+const { DataTypes, NOW } = require("sequelize")
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -21,11 +21,11 @@ module.exports = {
         },
         created_at: {
             type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW,
+            defaultValue: Date(),
         },
         updated_at: {
             type: Sequelize.DATE,
-            defaultValue: Sequelize.NOW,
+            defaultValue: Date(),
         },
       })
     },

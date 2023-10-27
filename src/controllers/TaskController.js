@@ -61,6 +61,9 @@ const updateTask = async (req, res, next) => {
         } else {
             
             const updatedTask = await Task.save(taskData)
+            console.log(updatedTask)
+            console.log("####################")
+            console.log(Date())
             // Respond with the updated task
             res.status(200).json(updatedTask);
         }
